@@ -5,7 +5,7 @@ package io.github.talelin.latticy.common.constant;
  * 消息码常量类
  * </p>
  *
- * @author 踏雪彡寻梅@浮生若梦
+ * @author 踏雪彡寻梅
  * @version 1.0
  * @date 2020/7/26 - 12:26
  * @since JDK1.8
