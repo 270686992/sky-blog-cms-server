@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- * 文章内容业务操作接口类实现类
+ * 文章内容业务操作接口类的实现类
  * </p>
  *
  * @author 踏雪彡寻梅

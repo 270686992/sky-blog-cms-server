@@ -115,4 +115,12 @@ public class CodeMessageConstant {
      */
     public static final int ARTICLE_TITLE_REPEAT = 30040;
 
+    /**
+     * 文章所选标签列表存在非法信息的消息码
+     */
+    public static final int SELECTED_TAG_LIST_ILLEGAL = 30050;
+
+    public static final int INSERT_TAG_ARTICLE_RELATION_FAILED = 30060;
+
+    public static final int DELETE_TAG_ARTICLE_RELATION_FAILED = 30070;
 }

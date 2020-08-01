@@ -3,7 +3,10 @@ package io.github.talelin.latticy.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.beans.BeanUtils;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,5 +35,11 @@ public class ArticleDetailDO extends ArticleDO {
      * 文章内容
      */
     private String content;
+
+    public ArticleDetailDO(ArticleDO article, List<Integer> tagIdList, String content) {
+        BeanUtils.copyProperties(article, this);
+        this.tagIdList = tagIdList;
+        this.content = content;
+    }
 
 }
