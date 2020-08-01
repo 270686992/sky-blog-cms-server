@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `article` (
   `publish_state`  TINYINT(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT '文章发布状态: 0-私密,1-发布',
   `views`          INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '文章阅读量',
   `priority`       INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '文章权重,权重值越低,展示的位置越上',
-  `kind`           TINYINT(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT '文章类型: 0-原创,1-转载',
+  `kind`           TINYINT(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT '文章类型: 0-转载,1-原创',
   `comment_number` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '文章评论数量',
   `enable_comment` TINYINT(3) UNSIGNED NOT NULL DEFAULT '1' COMMENT '文章评论开启状态: 1-允许评论,0-不允许评论',
   `create_time`    DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',

@@ -1,5 +1,7 @@
 package io.github.talelin.latticy.controller.v1;
 
+import lombok.Data;
+
 /**
  * <p>
  * 控制器基类
@@ -10,7 +12,9 @@ package io.github.talelin.latticy.controller.v1;
  * @date 2020/7/30 - 17:57
  * @since JDK1.8
  */
+@Data
 public class BaseController {
+
     final static String CREATE = "添加";
 
     final static String RETRIEVE = "查询";
@@ -18,4 +22,5 @@ public class BaseController {
     final static String UPDATE = "更新";
 
     final static String DELETE = "删除";
+
 }

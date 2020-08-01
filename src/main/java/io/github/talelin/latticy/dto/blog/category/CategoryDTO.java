@@ -1,7 +1,7 @@
 package io.github.talelin.latticy.dto.blog.category;
 
 import io.github.talelin.autoconfigure.validator.EnumValue;
-import io.github.talelin.latticy.common.enumeration.OnlineStatusEnum;
+import io.github.talelin.latticy.common.enumeration.OnlineStateEnum;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -33,7 +33,7 @@ public class CategoryDTO {
      * 文章分类的上线状态: 1-上线,0-下线
      */
     @NotNull(message = "{online.not-null}")
-    @EnumValue(target = OnlineStatusEnum.class, message = "{online.value}")
+    @EnumValue(target = OnlineStateEnum.class, message = "{online.value}")
     private Integer online;
 
     /**

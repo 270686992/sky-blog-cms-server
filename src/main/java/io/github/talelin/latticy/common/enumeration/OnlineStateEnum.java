@@ -10,7 +10,8 @@ package io.github.talelin.latticy.common.enumeration;
  * @date 2020/7/30 - 21:44
  * @since JDK1.8
  */
-public enum OnlineStatusEnum {
+public enum OnlineStateEnum {
+
     /**
      * 上线
      */
@@ -37,7 +38,7 @@ public enum OnlineStatusEnum {
      * @param value       枚举值
      * @param description 枚举描述
      */
-    OnlineStatusEnum(Integer value, String description) {
+    OnlineStateEnum(Integer value, String description) {
         this.value = value;
         this.description = description;
     }
@@ -57,4 +58,5 @@ public enum OnlineStatusEnum {
     public String getDescription() {
         return this.description;
     }
+
 }
