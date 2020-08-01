@@ -9,7 +9,9 @@ import io.github.talelin.latticy.common.constant.CodeMessageConstant;
 import io.github.talelin.latticy.common.mybatis.Page;
 import io.github.talelin.latticy.dto.blog.category.CategoryDTO;
 import io.github.talelin.latticy.mapper.CategoryMapper;
+import io.github.talelin.latticy.model.ArticleDO;
 import io.github.talelin.latticy.model.CategoryDO;
+import io.github.talelin.latticy.service.ArticleService;
 import io.github.talelin.latticy.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,20 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryDO> implements CategoryService {
+
+    /**
+     * 文章业务操作对象
+     */
+    private final ArticleService articleService;
+
+    /**
+     * 构造函数,注入该类需要的对象
+     *
+     * @param articleService 文章业务操作对象
+     */
+    public CategoryServiceImpl(ArticleService articleService) {
+        this.articleService = articleService;
+    }
 
     @Override
     public void createCategory(CategoryDTO categoryDTO) {
@@ -87,7 +103,15 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryDO>
             throw new NotFoundException(CodeMessageConstant.NOT_FOUND_CATEGORY);
         }
 
-        // TODO 判断文章分类是否和文章之间存在关联关系,如果存在则不可删除
+        // 判断文章分类是否和文章之间存在关联关系,如果存在则不可删除
+        ArticleDO article = this.articleService
+                .lambdaQuery()
+                .eq(ArticleDO::getCategoryId, categoryId)
+                .last("limit 1")
+                .one();
+        if (article != null) {
+            throw new ForbiddenException(CodeMessageConstant.FORBIDDEN_DELETE_CATEGORY);
+        }
 
         // 删除文章分类
         int deleteResult = this.getBaseMapper().deleteById(categoryId);
