@@ -59,6 +59,23 @@ public class CodeMessageConstant {
 
 
     /**
+     * 添加标签成功的消息码
+     */
+    public static final int CREATE_TAG_SUCCESS = 2060;
+
+    /**
+     * 更新标签成功的消息码
+     */
+    public static final int UPDATE_TAG_SUCCESS = 2061;
+
+    /**
+     * 删除标签成功的消息码
+     */
+    public static final int DELETE_TAG_SUCCESS = 2062;
+
+
+
+    /**
      * 找不到相关文章分类的消息码
      */
     public static final int NOT_FOUND_CATEGORY = 20000;
@@ -120,7 +137,46 @@ public class CodeMessageConstant {
      */
     public static final int SELECTED_TAG_LIST_ILLEGAL = 30050;
 
+    /**
+     * 添加文章和所选标签列表间的关系失败的消息码
+     */
     public static final int INSERT_TAG_ARTICLE_RELATION_FAILED = 30060;
 
+    /**
+     * 删除文章和所选标签列表间的关系失败的消息码
+     */
     public static final int DELETE_TAG_ARTICLE_RELATION_FAILED = 30070;
+
+
+
+    /**
+     * 找不到相关标签的消息码
+     */
+    public static final int NOT_FOUND_TAG = 40000;
+
+    /**
+     * 添加标签失败的消息码
+     */
+    public static final int CREATE_TAG_FAILED = 40010;
+
+    /**
+     * 更新标签失败的消息码
+     */
+    public static final int UPDATE_TAG_FAILED = 40020;
+
+    /**
+     * 删除标签失败的消息码
+     */
+    public static final int DELETE_TAG_FAILED = 40030;
+
+    /**
+     * 禁止删除标签的消息码
+     */
+    public static final int FORBIDDEN_DELETE_TAG = 40040;
+
+    /**
+     * 标签名称重复的消息码
+     */
+    public static final int TAG_NAME_REPEAT = 40050;
+
 }
