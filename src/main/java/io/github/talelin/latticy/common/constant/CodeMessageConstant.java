@@ -76,6 +76,23 @@ public class CodeMessageConstant {
 
 
     /**
+     * 添加友情链接成功的消息码
+     */
+    public static final int CREATE_FRIEND_LINK_SUCCESS = 2090;
+
+    /**
+     * 更新友情链接成功的消息码
+     */
+    public static final int UPDATE_FRIEND_LINK_SUCCESS = 2091;
+
+    /**
+     * 删除友情链接成功的消息码
+     */
+    public static final int DELETE_FRIEND_LINK_SUCCESS = 2092;
+
+
+
+    /**
      * 找不到相关文章分类的消息码
      */
     public static final int NOT_FOUND_CATEGORY = 20000;
@@ -178,5 +195,27 @@ public class CodeMessageConstant {
      * 标签名称重复的消息码
      */
     public static final int TAG_NAME_REPEAT = 40050;
+
+
+
+    /**
+     * 找不到相关友情链接的消息码
+     */
+    public static final int NOT_FOUND_FRIEND_LINK = 50000;
+
+    /**
+     * 添加友情链接失败的消息码
+     */
+    public static final int CREATE_FRIEND_LINK_FAILED = 50010;
+
+    /**
+     * 更新友情链接失败的消息码
+     */
+    public static final int UPDATE_FRIEND_LINK_FAILED = 50020;
+
+    /**
+     * 删除友情链接失败的消息码
+     */
+    public static final int DELETE_FRIEND_LINK_FAILED = 50030;
 
 }
