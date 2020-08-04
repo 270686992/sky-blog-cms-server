@@ -93,6 +93,13 @@ public class CodeMessageConstant {
 
 
     /**
+     * 更新博客用户状态成功的消息码
+     */
+    public static final int UPDATE_CUSTOMER_STATE_SUCCESS = 2120;
+
+
+
+    /**
      * 找不到相关文章分类的消息码
      */
     public static final int NOT_FOUND_CATEGORY = 20000;
@@ -217,5 +224,17 @@ public class CodeMessageConstant {
      * 删除友情链接失败的消息码
      */
     public static final int DELETE_FRIEND_LINK_FAILED = 50030;
+
+
+
+    /**
+     * 找不到相关博客用户的消息码
+     */
+    public static final int NOT_FOUND_CUSTOMER = 60000;
+
+    /**
+     * 更新博客用户状态失败的消息码
+     */
+    public static final int UPDATE_CUSTOMER_STATE_FAILED = 60010;
 
 }
