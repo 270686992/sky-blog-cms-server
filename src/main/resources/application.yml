@@ -11,6 +11,37 @@ spring:
   resources:
     # 关闭静态资源的映射
     add-mappings: false
+  # freemarker 配置
+  freemarker:
+    template-loader-path: classpath:/static/template
+    enabled: true
+    cache: false
+    charset: UTF-8
+    content-type: text/html
+    allow-request-override: false
+    check-template-location: true
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: false
+  # 邮件服务配置
+  mail:
+    host: smtp.163.com
+    port: 465
+    nickname: 博击长空站点站长 # 发件人昵称,自定义添加的配置项,非自带的邮件服务配置
+    username: sky_txxunmei@163.com
+    password: LZMQZGZZPZIJUPYX
+    default-encoding: UTF-8
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          connectiontimeout: 10000
+          timeout: 10000
+          writetimeout: 10000
+          auth: true
+          starttls:
+            enable: true
+            required: true
 
 # mybatis-plus 配置
 mybatis-plus:

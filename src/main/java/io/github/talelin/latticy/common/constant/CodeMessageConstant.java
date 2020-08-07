@@ -237,4 +237,9 @@ public class CodeMessageConstant {
      */
     public static final int UPDATE_CUSTOMER_STATE_FAILED = 60010;
 
+    /**
+     * 不支持的邮件类型的消息码
+     */
+    public static final int NONEXISTENT_EMAIL_KIND = 70000;
+
 }
