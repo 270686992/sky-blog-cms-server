@@ -75,3 +75,8 @@ logging:
   file:
     max-history:
   config:
+
+# 项目业务相关配置
+sky-blog:
+  # 站点信息的最大数量
+  web-site-info-maximum-quantity: 1
