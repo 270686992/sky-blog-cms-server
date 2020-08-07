@@ -100,6 +100,23 @@ public class CodeMessageConstant {
 
 
     /**
+     * 添加站点信息成功的消息码
+     */
+    public static final int CREATE_WEB_SITE_INFO_SUCCESS = 2150;
+
+    /**
+     * 更新站点信息成功的消息码
+     */
+    public static final int UPDATE_WEB_SITE_INFO_SUCCESS = 2151;
+
+    /**
+     * 删除站点信息成功的消息码
+     */
+    public static final int DELETE_WEB_SITE_INFO_SUCCESS = 2152;
+
+
+
+    /**
      * 找不到相关文章分类的消息码
      */
     public static final int NOT_FOUND_CATEGORY = 20000;
@@ -237,9 +254,38 @@ public class CodeMessageConstant {
      */
     public static final int UPDATE_CUSTOMER_STATE_FAILED = 60010;
 
+
+
     /**
      * 不支持的邮件类型的消息码
      */
     public static final int NONEXISTENT_EMAIL_KIND = 70000;
+
+
+
+    /**
+     * 找不到相关站点信息的消息码
+     */
+    public static final int NOT_FOUND_WEB_SITE_INFO = 80000;
+
+    /**
+     * 添加站点信息失败的消息码
+     */
+    public static final int CREATE_WEB_SITE_INFO_FAILED = 80010;
+
+    /**
+     * 更新站点信息失败的消息码
+     */
+    public static final int UPDATE_WEB_SITE_INFO_FAILED = 80020;
+
+    /**
+     * 删除站点信息失败的消息码
+     */
+    public static final int DELETE_WEB_SITE_INFO_FAILED = 80030;
+
+    /**
+     * 站点信息数量超过最大值的消息码
+     */
+    public static final int WEB_SITE_INFO_EXCEED_MAXIMUM_QUANTITY = 80040;
 
 }
