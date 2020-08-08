@@ -40,6 +40,8 @@ public class QiNiuUploader extends AbstractUploader {
 
     private String upToken;
 
+    private Auth auth;
+
     /**
      * 因为需要得到 spring-boot 提供的配置，所以不能在 constructor 中初始化
      * 使用 PostConstruct 来初始化
@@ -48,8 +50,7 @@ public class QiNiuUploader extends AbstractUploader {
     public void initUploadManager() {
         Configuration cfg = new Configuration(Region.region2());
         uploadManager = new UploadManager(cfg);
-        Auth auth = Auth.create(accessKey, secretKey);
-        upToken = auth.uploadToken(bucket);
+        auth = Auth.create(accessKey, secretKey);
     }
 
     @Override
@@ -78,6 +79,7 @@ public class QiNiuUploader extends AbstractUploader {
     protected boolean handleOneFile(byte[] bytes, String newFilename) {
         ByteArrayInputStream byteInputStream = new ByteArrayInputStream(bytes);
         try {
+            upToken = auth.uploadToken(bucket);
             Response response = uploadManager.put(byteInputStream, newFilename, upToken, null, null);
             log.info(response.toString());
             return response.isOK();
