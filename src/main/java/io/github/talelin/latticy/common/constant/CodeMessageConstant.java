@@ -139,6 +139,28 @@ public class CodeMessageConstant {
 
 
     /**
+     * 回复留言成功的消息码
+     */
+    public static final int REPLY_LEAVE_MESSAGE_SUCCESS = 2210;
+
+    /**
+     * 删除留言成功的消息码
+     */
+    public static final int DELETE_LEAVE_MESSAGE_SUCCESS = 2211;
+
+    /**
+     * 隐藏留言成功的消息码
+     */
+    public static final int HIDE_LEAVE_MESSAGE_SUCCESS = 2212;
+
+    /**
+     * 显示留言成功的消息码
+     */
+    public static final int DISPLAY_LEAVE_MESSAGE_SUCCESS = 2213;
+
+
+
+    /**
      * 找不到相关文章分类的消息码
      */
     public static final int NOT_FOUND_CATEGORY = 20000;
@@ -341,5 +363,37 @@ public class CodeMessageConstant {
      * 禁止更改文章评论显示状态的消息码
      */
     public static final int FORBIDDEN_UPDATE_COMMENT_DISPLAY_STATE = 90050;
+
+
+
+    /**
+     * 找不到相关留言的消息码
+     */
+    public static final int NOT_FOUND_LEAVE_MESSAGE = 100000;
+
+    /**
+     * 回复留言失败的消息码
+     */
+    public static final int REPLY_LEAVE_MESSAGE_FAILED = 100010;
+
+    /**
+     * 删除留言失败的消息码
+     */
+    public static final int DELETE_LEAVE_MESSAGE_FAILED = 100020;
+
+    /**
+     * 隐藏留言失败的消息码
+     */
+    public static final int HIDE_LEAVE_MESSAGE_FAILED = 100030;
+
+    /**
+     * 显示留言失败的消息码
+     */
+    public static final int DISPLAY_LEAVE_MESSAGE_FAILED = 100040;
+
+    /**
+     * 禁止更改留言显示状态的消息码
+     */
+    public static final int FORBIDDEN_UPDATE_LEAVE_MESSAGE_DISPLAY_STATE = 100050;
 
 }
