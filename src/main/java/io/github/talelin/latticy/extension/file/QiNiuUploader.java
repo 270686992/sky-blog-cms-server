@@ -6,15 +6,20 @@ import com.qiniu.storage.Configuration;
 import com.qiniu.storage.Region;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
+import io.github.talelin.latticy.common.util.CommonUtil;
+import io.github.talelin.latticy.common.util.DateChangeUtil;
+import io.github.talelin.latticy.common.util.LocalCacheUtil;
 import io.github.talelin.latticy.module.file.AbstractUploader;
 import io.github.talelin.latticy.module.file.FileConstant;
 import io.github.talelin.latticy.module.file.FileProperties;
-import org.springframework.beans.factory.annotation.Autowired;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.PostConstruct;
 import java.io.ByteArrayInputStream;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * 文件上传服务实现，上传到七牛
@@ -36,9 +41,14 @@ public class QiNiuUploader extends AbstractUploader {
     @Value("${lin.file.qiniuyun.bucket}")
     private String bucket;
 
+    @Value("${lin.file.qiniuyun.upload-token-time-limit}")
+    private Long upTokenTimeLimit;
+
     private UploadManager uploadManager;
 
     private String upToken;
+
+    private Auth auth;
 
     /**
      * 因为需要得到 spring-boot 提供的配置，所以不能在 constructor 中初始化
@@ -48,8 +58,12 @@ public class QiNiuUploader extends AbstractUploader {
     public void initUploadManager() {
         Configuration cfg = new Configuration(Region.region2());
         uploadManager = new UploadManager(cfg);
-        Auth auth = Auth.create(accessKey, secretKey);
-        upToken = auth.uploadToken(bucket);
+        auth = Auth.create(accessKey, secretKey);
+        Calendar now = Calendar.getInstance();
+        upToken = auth.uploadToken(bucket, null, upTokenTimeLimit, null);
+        Date upTokenExpiryTime = CommonUtil.calculateQiNiuUpTokenExpiryDate(now, upTokenTimeLimit.intValue()).getTime();
+        String upTokenExpiryTimeStr = DateChangeUtil.dateToString(upTokenExpiryTime);
+        LocalCacheUtil.setLocalCache(LocalCacheUtil.CACHE_PREFIX + "upTokenExpiryTime", upTokenExpiryTimeStr);
     }
 
     @Override
@@ -78,6 +92,17 @@ public class QiNiuUploader extends AbstractUploader {
     protected boolean handleOneFile(byte[] bytes, String newFilename) {
         ByteArrayInputStream byteInputStream = new ByteArrayInputStream(bytes);
         try {
+            String upTokenExpiryTimeStr = LocalCacheUtil.getLocalCache(LocalCacheUtil.CACHE_PREFIX + "upTokenExpiryTime");
+            Date upTokenExpiryTime = DateChangeUtil.stringToDate(upTokenExpiryTimeStr);
+            boolean expired = CommonUtil.isOutOfDate(upTokenExpiryTime);
+            if (expired) {
+                Calendar now = Calendar.getInstance();
+                upToken = auth.uploadToken(bucket, null, upTokenTimeLimit, null);
+                upTokenExpiryTime = CommonUtil.calculateQiNiuUpTokenExpiryDate(now, upTokenTimeLimit.intValue()).getTime();
+                upTokenExpiryTimeStr = DateChangeUtil.dateToString(upTokenExpiryTime);
+                LocalCacheUtil.setLocalCache(LocalCacheUtil.CACHE_PREFIX + "upTokenExpiryTime", upTokenExpiryTimeStr);
+            }
+
             Response response = uploadManager.put(byteInputStream, newFilename, upToken, null, null);
             log.info(response.toString());
             return response.isOK();
