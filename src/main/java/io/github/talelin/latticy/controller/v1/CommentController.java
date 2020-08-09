@@ -96,7 +96,7 @@ public class CommentController extends BaseController {
     @GroupRequired
     @Logger(template = "{user.nickname} 更新了一个文章评论的显示状态")
     public UpdatedVO updateCommentDisplayStateById(@RequestParam(name = "id") @NotNull(message = "{id.not-null}") @Positive(message = "{id.positive}") Integer commentId,
-                                                   @RequestParam(name = "display_state") @NotNull(message = "{comment.display-state.not-null}") @Range(min = 0, max = 1, message = "{comment.display-state.range}") Integer displayState) {
+                                                   @RequestParam(name = "display_state") @NotNull(message = "{display-state.not-null}") @Range(min = 0, max = 1, message = "{display-state.range}") Integer displayState) {
         return this.commentService.updateCommentDisplayStateById(commentId, displayState);
     }
 
