@@ -93,9 +93,14 @@ public class CodeMessageConstant {
 
 
     /**
-     * 更新博客用户状态成功的消息码
+     * 冻结博客用户成功的消息码
      */
-    public static final int UPDATE_CUSTOMER_STATE_SUCCESS = 2120;
+    public static final int FROZEN_CUSTOMER_SUCCESS = 2120;
+
+    /**
+     * 解封博客用户成功的消息码
+     */
+    public static final int UNBAN_CUSTOMER_SUCCESS = 2121;
 
 
 
@@ -294,9 +299,19 @@ public class CodeMessageConstant {
     public static final int NOT_FOUND_CUSTOMER = 60000;
 
     /**
-     * 更新博客用户状态失败的消息码
+     * 冻结博客用户失败的消息码
      */
-    public static final int UPDATE_CUSTOMER_STATE_FAILED = 60010;
+    public static final int FROZEN_CUSTOMER_FAILED = 60010;
+
+    /**
+     * 解封博客用户失败的消息码
+     */
+    public static final int UNBAN_CUSTOMER_FAILED = 60020;
+
+    /**
+     * 禁止更改博客用户状态的消息码
+     */
+    public static final int FORBIDDEN_UPDATE_CUSTOMER_STATE = 60030;
 
 
 

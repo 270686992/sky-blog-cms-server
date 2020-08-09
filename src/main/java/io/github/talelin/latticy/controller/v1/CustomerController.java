@@ -3,7 +3,6 @@ package io.github.talelin.latticy.controller.v1;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.github.talelin.core.annotation.*;
-import io.github.talelin.latticy.common.constant.CodeMessageConstant;
 import io.github.talelin.latticy.common.util.PageUtil;
 import io.github.talelin.latticy.model.CustomerDO;
 import io.github.talelin.latticy.service.CustomerService;
@@ -73,8 +72,7 @@ public class CustomerController extends BaseController {
     @Logger(template = "{user.nickname} 更新了一个博客用户的状态")
     public UpdatedVO updateCustomerStateById(@RequestParam(name = "id") @NotNull(message = "{id.not-null}") @Positive(message = "{id.positive}") Integer customerId,
                                              @RequestParam(name = "state") @NotNull(message = "{customer.state.not-null}") @Range(min = 0, max = 1, message = "{customer.state.range}") Integer customerState) {
-        this.customerService.updateCustomerStateById(customerId, customerState);
-        return new UpdatedVO(CodeMessageConstant.UPDATE_CUSTOMER_STATE_SUCCESS);
+        return this.customerService.updateCustomerStateById(customerId, customerState);
     }
 
     /**
