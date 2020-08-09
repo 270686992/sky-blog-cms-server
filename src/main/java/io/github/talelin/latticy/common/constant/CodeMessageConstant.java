@@ -117,6 +117,28 @@ public class CodeMessageConstant {
 
 
     /**
+     * 回复文章评论成功的消息码
+     */
+    public static final int REPLY_COMMENT_SUCCESS = 2180;
+
+    /**
+     * 删除文章评论成功的消息码
+     */
+    public static final int DELETE_COMMENT_SUCCESS = 2181;
+
+    /**
+     * 隐藏文章评论成功的消息码
+     */
+    public static final int HIDE_COMMENT_SUCCESS = 2181;
+
+    /**
+     * 显示文章评论成功的消息码
+     */
+    public static final int DISPLAY_COMMENT_SUCCESS = 2181;
+
+
+
+    /**
      * 找不到相关文章分类的消息码
      */
     public static final int NOT_FOUND_CATEGORY = 20000;
@@ -287,5 +309,37 @@ public class CodeMessageConstant {
      * 站点信息数量超过最大值的消息码
      */
     public static final int WEB_SITE_INFO_EXCEED_MAXIMUM_QUANTITY = 80040;
+
+
+
+    /**
+     * 找不到相关文章评论的消息码
+     */
+    public static final int NOT_FOUND_COMMENT = 90000;
+
+    /**
+     * 回复文章评论失败的消息码
+     */
+    public static final int REPLY_COMMENT_FAILED = 90010;
+
+    /**
+     * 删除文章评论失败的消息码
+     */
+    public static final int DELETE_COMMENT_FAILED = 90020;
+
+    /**
+     * 隐藏文章评论失败的消息码
+     */
+    public static final int HIDE_COMMENT_FAILED = 90030;
+
+    /**
+     * 显示文章评论失败的消息码
+     */
+    public static final int DISPLAY_COMMENT_FAILED = 90040;
+
+    /**
+     * 禁止更改文章评论显示状态的消息码
+     */
+    public static final int FORBIDDEN_UPDATE_COMMENT_DISPLAY_STATE = 90050;
 
 }
