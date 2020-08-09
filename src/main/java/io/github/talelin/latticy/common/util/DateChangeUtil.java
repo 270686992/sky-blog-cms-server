@@ -46,6 +46,7 @@ public class DateChangeUtil {
         try {
             date = sdf.parse(time);
         } catch (ParseException e) {
+            // TODO 后续将此处记录日志,并定义内部异常处理
             throw new FailedException(CodeMessageConstant.SERVER_ERROR);
         }
         return date;
