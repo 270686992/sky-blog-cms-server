@@ -3,6 +3,7 @@ package io.github.talelin.latticy.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import io.github.talelin.latticy.model.CustomerDO;
+import io.github.talelin.latticy.vo.UpdatedVO;
 
 /**
  * <p>
@@ -29,8 +30,9 @@ public interface CustomerService extends IService<CustomerDO> {
      *
      * @param customerId    博客用户的 ID
      * @param customerState 博客用户的新状态
+     * @return 更新成功返回成功的响应结果, 否则返回失败的响应结果
      */
-    void updateCustomerStateById(Integer customerId, Integer customerState);
+    UpdatedVO updateCustomerStateById(Integer customerId, Integer customerState);
 
     /**
      * 根据分页查询参数 page、count 获取当前页的博客用户列表

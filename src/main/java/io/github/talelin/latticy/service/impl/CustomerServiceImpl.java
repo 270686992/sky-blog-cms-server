@@ -3,13 +3,16 @@ package io.github.talelin.latticy.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.github.talelin.autoconfigure.exception.ForbiddenException;
 import io.github.talelin.autoconfigure.exception.NotFoundException;
 import io.github.talelin.autoconfigure.exception.ParameterException;
 import io.github.talelin.latticy.common.constant.CodeMessageConstant;
+import io.github.talelin.latticy.common.enumeration.CustomerStateEnum;
 import io.github.talelin.latticy.common.mybatis.Page;
 import io.github.talelin.latticy.mapper.CustomerMapper;
 import io.github.talelin.latticy.model.CustomerDO;
 import io.github.talelin.latticy.service.CustomerService;
+import io.github.talelin.latticy.vo.UpdatedVO;
 import org.springframework.stereotype.Service;
 
 /**
@@ -37,17 +40,37 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, CustomerDO>
     }
 
     @Override
-    public void updateCustomerStateById(Integer customerId, Integer customerState) {
+    public UpdatedVO updateCustomerStateById(Integer customerId, Integer customerState) {
         // 获取相应用户
         CustomerDO customer = this.getCustomerById(customerId);
 
-        // 判断用户原状态和新状态是否一致,如果一致不更新,不一致则更新
-        if (customer.getState().compareTo(customerState) != 0) {
-            // 原状态和新状态不一致,进行更新
-            customer.setState(customerState);
-            boolean updateResult = this.updateById(customer);
-            if (!updateResult) {
-                throw new ParameterException(CodeMessageConstant.UPDATE_CUSTOMER_STATE_FAILED);
+        if (customer.getState().equals(CustomerStateEnum.NORMAL.getValue())) {
+            // 正常状态更改为冻结状态,即冻结账号
+            // 判断原状态和新状态是否一致,不一致则更新
+            if (customer.getState().compareTo(customerState) != 0) {
+                customer.setState(customerState);
+                boolean updateResult = this.updateById(customer);
+                if (updateResult) {
+                    return new UpdatedVO(CodeMessageConstant.FROZEN_CUSTOMER_SUCCESS);
+                } else {
+                    throw new ParameterException(CodeMessageConstant.FROZEN_CUSTOMER_FAILED);
+                }
+            } else {
+                throw new ForbiddenException(CodeMessageConstant.FORBIDDEN_UPDATE_CUSTOMER_STATE);
+            }
+        } else {
+            // 冻结状态更改为正常状态,即解封账号
+            // 判断原状态和新状态是否一致,不一致则更新
+            if (customer.getState().compareTo(customerState) != 0) {
+                customer.setState(customerState);
+                boolean updateResult = this.updateById(customer);
+                if (updateResult) {
+                    return new UpdatedVO(CodeMessageConstant.UNBAN_CUSTOMER_SUCCESS);
+                } else {
+                    throw new ParameterException(CodeMessageConstant.UNBAN_CUSTOMER_FAILED);
+                }
+            } else {
+                throw new ForbiddenException(CodeMessageConstant.FORBIDDEN_UPDATE_CUSTOMER_STATE);
             }
         }
     }
