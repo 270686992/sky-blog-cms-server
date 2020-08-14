@@ -5,8 +5,6 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.beans.BeanUtils;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,14 +30,20 @@ public class ArticleDetailDO extends ArticleDO {
     private List<Integer> tagIdList;
 
     /**
+     * 文章所属分类名称
+     */
+    private String categoryName;
+
+    /**
      * 文章内容
      */
     private String content;
 
-    public ArticleDetailDO(ArticleDO article, List<Integer> tagIdList, String content) {
+    public ArticleDetailDO(ArticleDO article, List<Integer> tagIdList, String content, String categoryName) {
         BeanUtils.copyProperties(article, this);
         this.tagIdList = tagIdList;
         this.content = content;
+        this.categoryName = categoryName;
     }
 
 }
