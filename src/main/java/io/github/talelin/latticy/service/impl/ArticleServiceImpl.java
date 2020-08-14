@@ -10,11 +10,9 @@ import io.github.talelin.latticy.common.constant.CodeMessageConstant;
 import io.github.talelin.latticy.common.mybatis.Page;
 import io.github.talelin.latticy.dto.blog.article.ArticleDTO;
 import io.github.talelin.latticy.mapper.ArticleMapper;
+import io.github.talelin.latticy.mapper.CategoryMapper;
 import io.github.talelin.latticy.model.*;
-import io.github.talelin.latticy.service.ArticleContentService;
-import io.github.talelin.latticy.service.ArticleService;
-import io.github.talelin.latticy.service.TagArticleService;
-import io.github.talelin.latticy.service.TagService;
+import io.github.talelin.latticy.service.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,16 +49,23 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleDO> im
     private final TagArticleService tagArticleService;
 
     /**
+     * 文章分类持久化操作对象
+     */
+    private final CategoryMapper categoryMapper;
+
+    /**
      * 构造函数,注入该类需要的对象
      *
      * @param articleContentService 文章内容业务操作对象
      * @param tagService            标签业务操作对象
      * @param tagArticleService     标签和文章间关系业务操作对象
+     * @param categoryMapper       文章分类持久化操作对象
      */
-    public ArticleServiceImpl(ArticleContentService articleContentService, TagService tagService, TagArticleService tagArticleService) {
+    public ArticleServiceImpl(ArticleContentService articleContentService, TagService tagService, TagArticleService tagArticleService, CategoryMapper categoryMapper) {
         this.articleContentService = articleContentService;
         this.tagService = tagService;
         this.tagArticleService = tagArticleService;
+        this.categoryMapper = categoryMapper;
     }
 
     /**
@@ -216,8 +221,11 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleDO> im
         // 获取文章关联的标签的 ID 列表
         List<Integer> tagIdList = this.getTagIdListByArticleId(articleId);
 
+        // 获取文章所属分类
+        CategoryDO category = this.categoryMapper.selectById(article.getCategoryId());
+
         // 封装文章详情信息返回
-        return new ArticleDetailDO(article, tagIdList, articleContent.getContent());
+        return new ArticleDetailDO(article, tagIdList, articleContent.getContent(), category.getName());
     }
 
     @Override

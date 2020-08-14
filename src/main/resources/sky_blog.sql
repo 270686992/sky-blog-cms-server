@@ -42,7 +42,8 @@ CREATE TABLE IF NOT EXISTS `article` (
   `update_time`    DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '更新时间',
   `delete_time`    DATETIME(3) DEFAULT NULL COMMENT '删除时间,软删除',
   PRIMARY KEY (`id`),
-  KEY `category_id_del_idx` (`category_id`, `delete_time`)
+  KEY `category_id_del_idx` (`category_id`, `delete_time`),
+  KEY `del_priority_idx` (`delete_time`, `priority`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 1
   DEFAULT CHARSET = utf8mb4
