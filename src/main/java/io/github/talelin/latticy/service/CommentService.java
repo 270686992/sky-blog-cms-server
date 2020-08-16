@@ -53,10 +53,21 @@ public interface CommentService extends IService<CommentDO> {
     /**
      * 根据分页查询参数 page、count 获取当前页的文章评论列表
      *
-     * @param page  当前页数
-     * @param count 每页的文章评论数量
+     * @param page   当前页数
+     * @param count  每页的文章评论数量
+     * @param isRoot 标记是否获取一级评论,1: 获取一级评论,0: 获取二级评论
      * @return 返回封装着获取的文章评论列表的分页对象
      */
-    IPage<CommentDO> getCommentListByPage(Integer page, Integer count);
+    IPage<CommentDO> getCommentListByPage(Integer page, Integer count, Integer isRoot);
+
+    /**
+     * 根据分页查询参数 page、count 和 一级评论的 ID 获取某个一级评论下的当前页的二级评论列表
+     *
+     * @param page          当前页数
+     * @param count         每页的二级评论数量
+     * @param rootCommentId 一级评论的 ID
+     * @return 返回封装着获取的二级评论列表的分页对象
+     */
+    IPage<CommentDO> getSubCommentListByPage(Integer page, Integer count, Integer rootCommentId);
 
 }

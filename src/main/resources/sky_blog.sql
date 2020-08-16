@@ -163,11 +163,9 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `id`                 INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '评论 ID,自增主键',
   `article_id`         INT(10) UNSIGNED NOT NULL COMMENT '评论所属文章的 ID',
   `customer_id`        INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '评论所属用户的 ID',
-  `admin_user_id`      INT(10) UNSIGNED DEFAULT NULL COMMENT '评论所属管理员用户的 ID',
+  `admin_user_id`      INT(10) UNSIGNED DEFAULT NULL COMMENT '评论所属管理员用户的 ID(管理员给评论回复)',
+  `root_id`            INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '根评论 ID,即一级评论 ID',
   `parent_id`          INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '父级评论 ID',
-  `parent_customer_id` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '父级评论所属用户的 ID',
-  `reply_id`           INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '被回复的评论的 ID',
-  `reply_customer_id`  INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '被回复的评论所属用户的 ID',
   `root`               TINYINT(3) UNSIGNED NOT NULL DEFAULT '1' COMMENT '标记当前评论是否为一级评论: 1-一级评论,0-二级评论;回复文章的是一级评论,其它的都是二级评论',
   `content`            VARCHAR(500) NOT NULL COMMENT '评论内容/回复内容',
   `ip`                 VARCHAR(50) DEFAULT NULL COMMENT '评论者当前 IP',
@@ -179,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id`),
   KEY `article_id_root_del_idx` (`article_id`, `root`, `delete_time`),
   KEY `parent_id_root_del_idx` (`parent_id`, `root`, `delete_time`),
-  KEY `customer_id_del_idx` (`customer_id`, `delete_time`)
+  KEY `root_id_del_idx` (`root_id`, `delete_time`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 1
   DEFAULT CHARSET = utf8mb4

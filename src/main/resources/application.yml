@@ -80,3 +80,5 @@ logging:
 sky-blog:
   # 站点信息的最大数量
   web-site-info-maximum-quantity: 1
+  # 站点网址首页地址
+  home-page-url: https://www.xilikeli.cn
