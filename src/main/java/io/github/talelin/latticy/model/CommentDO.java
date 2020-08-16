@@ -41,24 +41,14 @@ public class CommentDO extends BaseModel implements Serializable {
     private Integer adminUserId;
 
     /**
+     * 根评论 ID,即一级评论 ID
+     */
+    private Integer rootId;
+
+    /**
      * 父级评论 ID
      */
     private Integer parentId;
-
-    /**
-     * 父级评论所属用户的 ID
-     */
-    private Integer parentCustomerId;
-
-    /**
-     * 被回复的二级评论的 ID
-     */
-    private Integer replyId;
-
-    /**
-     * 被回复的二级评论所属用户的 ID
-     */
-    private Integer replyCustomerId;
 
     /**
      * 标记当前评论是否为一级评论: 1-一级评论,0-二级评论

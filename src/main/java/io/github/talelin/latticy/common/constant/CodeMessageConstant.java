@@ -134,12 +134,12 @@ public class CodeMessageConstant {
     /**
      * 隐藏文章评论成功的消息码
      */
-    public static final int HIDE_COMMENT_SUCCESS = 2181;
+    public static final int HIDE_COMMENT_SUCCESS = 2182;
 
     /**
      * 显示文章评论成功的消息码
      */
-    public static final int DISPLAY_COMMENT_SUCCESS = 2181;
+    public static final int DISPLAY_COMMENT_SUCCESS = 2183;
 
 
 
