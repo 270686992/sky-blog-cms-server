@@ -28,8 +28,8 @@ spring:
     host: smtp.163.com
     port: 465
     nickname: 博击长空站点站长 # 发件人昵称,自定义添加的配置项,非自带的邮件服务配置
-    username: sky_txxunmei@163.com
-    password: LZMQZGZZPZIJUPYX
+    username: xxxx@163.com
+    password: XXXXXXXXXXXXXXXX
     default-encoding: UTF-8
     protocol: smtps
     properties:
