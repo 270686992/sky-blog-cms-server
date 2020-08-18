@@ -12,7 +12,10 @@ import io.github.talelin.latticy.dto.blog.article.ArticleDTO;
 import io.github.talelin.latticy.mapper.ArticleMapper;
 import io.github.talelin.latticy.mapper.CategoryMapper;
 import io.github.talelin.latticy.model.*;
-import io.github.talelin.latticy.service.*;
+import io.github.talelin.latticy.service.ArticleContentService;
+import io.github.talelin.latticy.service.ArticleService;
+import io.github.talelin.latticy.service.TagArticleService;
+import io.github.talelin.latticy.service.TagService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,7 +52,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleDO> im
     private final TagArticleService tagArticleService;
 
     /**
-     * 文章分类持久化操作对象
+     * 文章分类 Mapper 对象
      */
     private final CategoryMapper categoryMapper;
 
@@ -59,7 +62,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleDO> im
      * @param articleContentService 文章内容业务操作对象
      * @param tagService            标签业务操作对象
      * @param tagArticleService     标签和文章间关系业务操作对象
-     * @param categoryMapper       文章分类持久化操作对象
+     * @param categoryMapper        文章分类 Mapper 对象
      */
     public ArticleServiceImpl(ArticleContentService articleContentService, TagService tagService, TagArticleService tagArticleService, CategoryMapper categoryMapper) {
         this.articleContentService = articleContentService;

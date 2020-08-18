@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * <p>
- * 友情链接持久化操作接口类
+ * 友情链接 Mapper 接口类
  * </p>
  *
  * @author 踏雪彡寻梅

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * <p>
- * 文章持久化操作接口类
+ * 文章 Mapper 接口类
  * </p>
  *
  * @author 踏雪彡寻梅

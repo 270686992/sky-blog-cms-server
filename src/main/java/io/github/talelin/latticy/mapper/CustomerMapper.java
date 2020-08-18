@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * <p>
- * 博客用户持久化操作接口类
+ * 博客用户 Mapper 接口类
  * </p>
  *
  * @author 踏雪彡寻梅
