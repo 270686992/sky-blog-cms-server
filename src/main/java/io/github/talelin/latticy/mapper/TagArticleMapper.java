@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * <p>
- * 标签和文章间关系持久化操作接口类
+ * 标签和文章间关系 Mapper 接口类
  * </p>
  *
  * @author 踏雪彡寻梅
