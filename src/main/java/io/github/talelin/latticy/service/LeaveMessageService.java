@@ -53,10 +53,21 @@ public interface LeaveMessageService extends IService<LeaveMessageDO> {
     /**
      * 根据分页查询参数 page、count 获取当前页的留言列表
      *
-     * @param page  当前页数
-     * @param count 每页的留言数量
+     * @param page   当前页数
+     * @param count  每页的留言数量
+     * @param isRoot 标记是否获取一级留言,1: 获取一级留言,0: 获取二级留言
      * @return 返回封装着获取的留言列表的分页对象
      */
-    IPage<LeaveMessageDO> getLeaveMessageListByPage(Integer page, Integer count);
+    IPage<LeaveMessageDO> getLeaveMessageListByPage(Integer page, Integer count, Integer isRoot);
+
+    /**
+     * 根据分页查询参数 page、count 和 一级留言的 ID 获取某个一级留言下的当前页的二级留言列表
+     *
+     * @param page               当前页数
+     * @param count              每页的二级留言数量
+     * @param rootLeaveMessageId 一级留言的 ID
+     * @return 返回封装着获取的二级留言列表的分页对象
+     */
+    IPage<LeaveMessageDO> getSubLeaveMessageListByPage(Integer page, Integer count, Integer rootLeaveMessageId);
 
 }

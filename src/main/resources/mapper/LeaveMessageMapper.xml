@@ -10,10 +10,8 @@
         <result column="delete_time" property="deleteTime" />
         <result column="customer_id" property="customerId" />
         <result column="admin_user_id" property="adminUserId" />
+        <result column="root_id" property="rootId" />
         <result column="parent_id" property="parentId" />
-        <result column="parent_customer_id" property="parentCustomerId" />
-        <result column="reply_id" property="replyId" />
-        <result column="reply_customer_id" property="replyCustomerId" />
         <result column="root" property="root" />
         <result column="content" property="content" />
         <result column="ip" property="ip" />

@@ -36,24 +36,14 @@ public class LeaveMessageDO extends BaseModel implements Serializable {
     private Integer adminUserId;
 
     /**
+     * 根留言 ID
+     */
+    private Integer rootId;
+
+    /**
      * 父级留言 ID
      */
     private Integer parentId;
-
-    /**
-     * 父级留言所属用户的 ID
-     */
-    private Integer parentCustomerId;
-
-    /**
-     * 被回复的留言的 ID
-     */
-    private Integer replyId;
-
-    /**
-     * 被回复的留言所属用户的 ID
-     */
-    private Integer replyCustomerId;
 
     /**
      * 标记当前留言是否为一级留言: 1-一级留言,0-二级留言

@@ -191,11 +191,9 @@ DROP TABLE IF EXISTS `leave_message`;
 CREATE TABLE IF NOT EXISTS `leave_message` (
   `id`                 INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '留言 ID,自增主键',
   `customer_id`        INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '留言所属用户的 ID',
-  `admin_user_id`      INT(10) UNSIGNED DEFAULT NULL COMMENT '留言所属管理员用户的 ID',
+  `admin_user_id`      INT(10) UNSIGNED DEFAULT NULL COMMENT '留言所属管理员用户的 ID(管理员给留言回复)',
+  `root_id`            INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '根留言 ID,即一级留言 ID',
   `parent_id`          INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '父级留言 ID',
-  `parent_customer_id` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '父级留言所属用户的 ID',
-  `reply_id`           INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '被回复的留言的 ID',
-  `reply_customer_id`  INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '被回复的留言所属用户的 ID',
   `root`               TINYINT(3) UNSIGNED NOT NULL DEFAULT '1' COMMENT '标记当前留言是否为一级留言: 1-一级留言,0-二级留言',
   `content`            VARCHAR(500) NOT NULL COMMENT '留言内容/回复内容',
   `ip`                 VARCHAR(50) DEFAULT NULL COMMENT '留言者当前 IP',
@@ -206,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `leave_message` (
   `delete_time`        DATETIME(3) DEFAULT NULL COMMENT '删除时间,软删除',
   PRIMARY KEY (`id`),
   KEY `parent_id_root_del_idx` (`parent_id`, `root`, `delete_time`),
-  KEY `customer_id_del_idx` (`customer_id`, `delete_time`)
+  KEY `root_id_del_idx` (`root_id`, `delete_time`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 1
   DEFAULT CHARSET = utf8mb4
