@@ -153,10 +153,6 @@ CREATE TABLE IF NOT EXISTS `customer_identity`
 
 -- ----------------------------
 -- 文章评论表
--- 一级评论: 对文章的评论
--- 二级评论: 对文章下的评论的回复评论,这里包括二种: 回复的是一级评论,回复的是二级评论
--- 查询文章下的一级评论: SELECT * FROM `comment` WHERE `article_id` = 1 AND `root` = 1 AND `delete_time` IS NULL ORDER BY `id` DESC;
--- 查询评论下的回复: SELECT * FROM `comment` WHERE `parent_id` = 1 AND `root` = 0 AND `delete_time` IS NULL ORDER BY `id` DESC;
 -- ----------------------------
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE IF NOT EXISTS `comment` (
@@ -267,10 +263,3 @@ CREATE TABLE IF NOT EXISTS `web_site_info` (
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_general_ci
   COMMENT = '站点信息表';
-
--- ----------------------------
--- 站点信息表默认数据
--- ----------------------------
-BEGIN;
-INSERT INTO `web_site_info` VALUES (1, '博击长空', '简单的事情重复做,重复的事情坚持做,坚持的事情用心做。', '宝剑锋从磨砺出，梅花香自苦寒来。', '2020-2020', 'V1.0.0', '琼ICP备20000534号-1', '踏雪彡寻梅', 'http://bjck.xilikeli.cn/7087d584fc744806a12b7534e71435f6.jpg', 'http://bjck.xilikeli.cn/a562353f00e7421080ee9ce4842f310b.jpg', 'https://bjck.xilikeli.cn/f3f49f0806014b79a4cdaf68f087ce7c.jpg', '交换友链可发布您的友链信息在留言板:\n<br/>\n友链模板如下:\n<br/>\n名称：你的网站名称(如: 博击长空)\n<br/>\n网址：你的网站地址(如: https://www.xilikeli.cn)\n<br/>\n图标：你的网站图标地址(如: http://bjck.xilikeli.cn/a562353f00e7421080ee9ce4842f310b.jpg)\n<br/>\n描述：你的网站描述(如: 简单的事情重复做,重复的事情坚持做,坚持的事情用心做。)\n<br/>\n<br/>\n申请提交后若无其它原因将在 24 小时内审核,如超过时间还未通过,请私信我.(各种额外因素)', '一个热爱编程的大三学生~~~\n<br/>\n希望借助本站点分享我的文章能够帮助到各位朋友,如有写的不好的地方也望各位大佬不吝啬教 O(∩_∩)O\n<br/>\n可通过该邮箱联系到我: <a href=\"mailto:sky_txxunmei@163.com\">sky_txxunmei@163.com</a>', '本站点创建于 2020 年 3 月,主要用于编写个人在关于编程方面的一些总结文章,希望能够帮助到大家。\n<br/>\n本站结构:\n<br/>\n前端: 使用了燕十三大佬开源的博客模板: <a href=\"https://gitee.com/yssgit/yan_shisan_blog_template\" target=\"_blank\">模板链接</a>\n<br/>\n后端: 采用 SpringBoot + MySql\n<br/>\n服务器: 本站采用阿里云提供的服务器 ESC。', '本站采用「<a href=\"https://creativecommons.org/licenses/by-nc/4.0/deed.zh\" target=\"_blank\">署名-非商业性使用 4.0 国际 (CC BY-NC 4.0)</a>」创作共享协议。只要在使用时注明出处，那么您可以可以对本站所有原创内容进行转载、节选、二次创作，但是您不得对其用于商业目的。', '本站文章仅代表个人观点，和任何组织或个人无关。\n<br/>\n本站文章有时可能会使用网上搜索到的图片,如有侵权,请联系我的邮箱进行删除。', '欢迎光临本站，希望本站的博文能够帮助到各位朋友 O(∩_∩)O ,谢谢支持,祝您生活愉快。', NOW(), NOW(), NULL);
-COMMIT;
