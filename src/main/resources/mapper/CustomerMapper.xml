@@ -31,8 +31,8 @@
         WHERE
         <if test="keyword != null">
             `c`.`username` LIKE #{keyword}
-        </if>
         AND
+        </if>
             `c`.`delete_time` IS NULL
     </select>
 </mapper>
