@@ -61,7 +61,7 @@ public class ArticleDO extends BaseModel implements Serializable {
     private Integer priority;
 
     /**
-     * 文章类型: 0-原创,1-转载
+     * 文章类型: 1-原创,0-转载
      */
     private Integer kind;
 
