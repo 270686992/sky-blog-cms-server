@@ -1,0 +1,84 @@
+# 主配置文件
+spring:
+  # 激活环境配置
+  profiles:
+    active: dev
+  # 文件编码 UTF8
+  mandatory-file-encoding: UTF-8
+  mvc:
+    # 404 交给异常处理器处理
+    throw-exception-if-no-handler-found: true
+  resources:
+    # 关闭静态资源的映射
+    add-mappings: false
+  # freemarker 配置
+  freemarker:
+    template-loader-path: classpath:/static/template
+    enabled: true
+    cache: false
+    charset: UTF-8
+    content-type: text/html
+    allow-request-override: false
+    check-template-location: true
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: false
+  # 邮件服务配置
+  mail:
+    host: smtp.163.com
+    port: 465
+    nickname: 博击长空站点站长 # 发件人昵称,自定义添加的配置项,非自带的邮件服务配置
+    username: xxxx@163.com
+    password: XXXXXXXXXXXXXXXX
+    default-encoding: UTF-8
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          connectiontimeout: 10000
+          timeout: 10000
+          writetimeout: 10000
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+# mybatis-plus 配置
+mybatis-plus:
+  configuration:
+    # 开启下划线转驼峰
+    map-underscore-to-camel-case: true
+    # 指定默认枚举类型的类型转换器
+    default-enum-type-handler: com.baomidou.mybatisplus.extension.handlers.MybatisEnumTypeHandler
+  global-config:
+    # 开启/关闭 banner 打印
+    banner: false
+    db-config:
+      # 逻辑删除（软删除）
+      logic-delete-value: NOW()
+      logic-not-delete-value: 'NULL'
+  # mapper 路径位置
+  mapper-locations: classpath:mapper/*.xml
+
+# cms 配置
+lin:
+  cms:
+    # 开启行为日志记录（logger）
+    logger-enabled: true
+    # access token 过期时间，3600s 一个小时
+    token-access-expire: 3600
+    # refresh token 过期时间，2592000s 一个月
+    token-refresh-expire: 2592000
+    # 令牌 secret
+    token-secret: x88Wf0991079889x8796a0Ac68f9ecJJU17c5Vbe8beod7d8d3e695*4
+logging:
+  file:
+    max-history:
+  config:
+
+# 项目业务相关配置
+sky-blog:
+  # 站点信息的最大数量
+  web-site-info-maximum-quantity: 1
+  # 站点网址首页地址
+  home-page-url: https://www.xilikeli.cn

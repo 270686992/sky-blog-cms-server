@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.github.talelin.latticy.mapper.CustomerMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="io.github.talelin.latticy.model.CustomerDO">
+        <id column="id" property="id" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="delete_time" property="deleteTime" />
+        <result column="username" property="username" />
+        <result column="email" property="email" />
+        <result column="nickname" property="nickname" />
+        <result column="state" property="state" />
+        <result column="avatar" property="avatar" />
+    </resultMap>
+
+    <select id="searchCustomerList" resultMap="BaseResultMap">
+        SELECT
+            `c`.`id`,
+            `c`.`username`,
+            `c`.`email`,
+            `c`.`nickname`,
+            `c`.`state`,
+            `c`.`avatar`,
+            `c`.`create_time`,
+            `c`.`update_time`,
+            `c`.`delete_time`
+        FROM
+            `customer` `c`
+        WHERE
+        <if test="keyword != null">
+            `c`.`username` LIKE #{keyword}
+        AND
+        </if>
+            `c`.`delete_time` IS NULL
+    </select>
+</mapper>
