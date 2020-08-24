@@ -1,7 +1,6 @@
 package io.github.talelin.latticy.common.util;
 
-import io.github.talelin.autoconfigure.exception.FailedException;
-import io.github.talelin.latticy.common.constant.CodeMessageConstant;
+import lombok.extern.slf4j.Slf4j;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,6 +16,7 @@ import java.util.Date;
  * @date 2020/8/8 - 17:51
  * @since JDK1.8
  */
+@Slf4j
 public class DateChangeUtil {
 
     /**
@@ -42,12 +42,12 @@ public class DateChangeUtil {
         // 定义日期格式
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         // 转换为 Date 类型的日期返回
-        Date date = null;
+        Date date;
         try {
             date = sdf.parse(time);
-        } catch (ParseException e) {
-            // TODO 后续将此处记录日志,并定义内部异常处理
-            throw new FailedException(CodeMessageConstant.SERVER_ERROR);
+        } catch (Exception e) {
+            log.error("将字符串形式的日期时间转换为 Date 类型的日期时间时出现异常: ", e);
+            return null;
         }
         return date;
     }

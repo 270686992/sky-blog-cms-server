@@ -1,7 +1,7 @@
 package io.github.talelin.latticy.common.util;
 
-import io.github.talelin.autoconfigure.exception.FailedException;
-import io.github.talelin.latticy.common.constant.CodeMessageConstant;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.lionsoul.ip2region.DataBlock;
 import org.lionsoul.ip2region.DbConfig;
 import org.lionsoul.ip2region.DbSearcher;
@@ -16,6 +16,7 @@ import org.lionsoul.ip2region.DbSearcher;
  * @date 2020/8/9 - 13:51
  * @since JDK1.8
  */
+@Slf4j
 public class IpParseUtil {
 
     /**
@@ -26,6 +27,10 @@ public class IpParseUtil {
      */
     public static String getAddressByIp(String ip) {
         try {
+            if (StringUtils.isBlank(ip)) {
+                return "中国";
+            }
+
             DbConfig config = new DbConfig();
             String dbFilePath = IpParseUtil.class.getResource("/ip2region.db").getPath();
             DbSearcher searcher = new DbSearcher(config, dbFilePath);
@@ -61,8 +66,8 @@ public class IpParseUtil {
             address = "中国";
             return address;
         } catch (Exception e) {
-            // TODO 后续将此处记录日志,并定义内部异常处理
-            throw new FailedException(CodeMessageConstant.SERVER_ERROR);
+            log.error("IpParseUtil 解析 IP 地址时出现异常: ", e);
+            return "中国";
         }
     }
 

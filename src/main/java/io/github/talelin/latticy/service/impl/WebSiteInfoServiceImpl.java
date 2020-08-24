@@ -1,11 +1,15 @@
 package io.github.talelin.latticy.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.github.talelin.autoconfigure.exception.ForbiddenException;
 import io.github.talelin.autoconfigure.exception.NotFoundException;
 import io.github.talelin.autoconfigure.exception.ParameterException;
 import io.github.talelin.latticy.common.constant.CodeMessageConstant;
+import io.github.talelin.latticy.common.util.JsonUtil;
 import io.github.talelin.latticy.dto.blog.websiteinfo.WebSiteInfoDTO;
+import io.github.talelin.latticy.extension.redis.RedisKeyConstant;
+import io.github.talelin.latticy.extension.redis.RedisOperator;
 import io.github.talelin.latticy.mapper.WebSiteInfoMapper;
 import io.github.talelin.latticy.model.WebSiteInfoDO;
 import io.github.talelin.latticy.service.WebSiteInfoService;
@@ -26,11 +30,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class WebSiteInfoServiceImpl extends ServiceImpl<WebSiteInfoMapper, WebSiteInfoDO> implements WebSiteInfoService {
 
+    private final RedisOperator redisOperator;
+
     /**
      * 站点信息的最大数量
      */
     @Value("${sky-blog.web-site-info-maximum-quantity}")
     private int maximumQuality;
+
+    public WebSiteInfoServiceImpl(RedisOperator redisOperator) {
+        this.redisOperator = redisOperator;
+    }
 
     @Override
     public void createWebSiteInfo(WebSiteInfoDTO webSiteInfoDTO) {
@@ -47,6 +57,9 @@ public class WebSiteInfoServiceImpl extends ServiceImpl<WebSiteInfoMapper, WebSi
         if (!saveResult) {
             throw new ParameterException(CodeMessageConstant.CREATE_WEB_SITE_INFO_FAILED);
         }
+
+        // 处理 redis 中的站点信息缓存,确保 C 端查询该数据时一致
+        this.disposeWebSiteInfoCache(webSiteInfo);
     }
 
     @Override
@@ -71,6 +84,25 @@ public class WebSiteInfoServiceImpl extends ServiceImpl<WebSiteInfoMapper, WebSi
         if (!updateResult) {
             throw new ParameterException(CodeMessageConstant.UPDATE_WEB_SITE_INFO_FAILED);
         }
+
+        // 处理 redis 中的站点信息缓存,确保 C 端查询该数据时一致
+        this.disposeWebSiteInfoCache(webSiteInfo);
+    }
+
+    /**
+     * 处理 redis 中的站点信息缓存,确保 C 端查询该数据时一致
+     *
+     * @param webSiteInfo 站点信息
+     */
+    private void disposeWebSiteInfoCache(WebSiteInfoDO webSiteInfo) {
+        // 判断 redis 缓存中是否有站点信息缓存
+        String webSiteInfoStr = this.redisOperator.get(RedisKeyConstant.WEB_SITE_INFO_KEY);
+        if (StringUtils.isNotBlank(webSiteInfoStr)) {
+            // 已有缓存,删除缓存
+            this.redisOperator.del(RedisKeyConstant.WEB_SITE_INFO_KEY);
+        }
+        // 将数据缓存到 redis 中,过期时间 30 天
+        this.redisOperator.set(RedisKeyConstant.WEB_SITE_INFO_KEY, JsonUtil.objectToJson(webSiteInfo), 3600 * 24 * 30);
     }
 
     @Override

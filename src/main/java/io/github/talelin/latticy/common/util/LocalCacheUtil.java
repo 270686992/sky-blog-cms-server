@@ -3,9 +3,8 @@ package io.github.talelin.latticy.common.util;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import io.github.talelin.autoconfigure.exception.FailedException;
-import io.github.talelin.latticy.common.constant.CodeMessageConstant;
 import io.github.talelin.latticy.common.constant.CommonConstant;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +19,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2020/8/8 - 17:33
  * @since JDK1.8
  */
+@Slf4j
 public class LocalCacheUtil {
 
     /**
@@ -72,9 +72,10 @@ public class LocalCacheUtil {
 
             return value;
         } catch (ExecutionException e) {
-            // TODO 后续将此处记录日志,并定义内部异常处理
-            throw new FailedException(CodeMessageConstant.SERVER_ERROR);
+            log.error("从本地缓存(LocalCacheUtil)获取 local_" + key + " 的值出现异常: ", e);
         }
+
+        return null;
     }
 
 }
