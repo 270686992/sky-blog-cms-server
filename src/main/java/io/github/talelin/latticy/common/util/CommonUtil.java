@@ -23,8 +23,12 @@ public class CommonUtil {
      * @return 过期返回 true,没有过期返回 false
      */
     public static boolean isOutOfDate(Date expiredTime) {
-        Long now = Calendar.getInstance().getTimeInMillis();
-        Long expiredTimeStamp = expiredTime.getTime();
+        if (expiredTime == null) {
+            return true;
+        }
+
+        long now = Calendar.getInstance().getTimeInMillis();
+        long expiredTimeStamp = expiredTime.getTime();
         return now > expiredTimeStamp;
     }
 
