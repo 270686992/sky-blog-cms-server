@@ -1,5 +1,6 @@
 package io.github.talelin.latticy.common.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ import java.net.UnknownHostException;
  * @since JDK1.8
  */
 @Component
+@Slf4j
 public class HttpRequestProxy {
 
     /**
@@ -68,11 +70,14 @@ public class HttpRequestProxy {
                     try {
                         inetAddress = InetAddress.getLocalHost();
                     } catch (UnknownHostException e) {
-                        // TODO 后续将此处记录日志,并定义内部异常处理
-                        e.printStackTrace();
+                        log.error("HttpRequestProxy 获取本地 IP 地址时出现异常: ", e);
                     }
 
-                    ipAddress = inetAddress.getHostAddress();
+                    if (inetAddress == null) {
+                        ipAddress = "127.0.0.1";
+                    } else {
+                        ipAddress = inetAddress.getHostAddress();
+                    }
                 }
             }
 
@@ -85,6 +90,7 @@ public class HttpRequestProxy {
                 }
             }
         } catch (Exception e) {
+            log.error("HttpRequestProxy 获取 IP 地址时出现异常: ", e);
             ipAddress = "";
         }
 
