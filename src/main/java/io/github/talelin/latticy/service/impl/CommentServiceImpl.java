@@ -183,7 +183,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, CommentDO> im
 
         if (comment.getRoot().equals(CommentLevelEnum.ROOT.getValue())) {
             // 如果为一级评论,同时删除一级评论下的二级评论
-            // 如果为二级评论,只删除二级评论,不删除其子评论,删除后虽然该评论的子评论未删除,但通过 C 端服务端的查询处理可以让其子评论不显示
+            // 如果为二级评论,只删除二级评论,不删除其子评论,删除后虽然该评论的子评论未删除,但通过 C 端前端的处理可让引用其的子评论显示的引用内容为评论已删除
             List<CommentDO> subCommentList = this.lambdaQuery()
                     .eq(CommentDO::getRoot, CommentLevelEnum.NOT_ROOT.getValue())
                     .eq(CommentDO::getRootId, comment.getId())

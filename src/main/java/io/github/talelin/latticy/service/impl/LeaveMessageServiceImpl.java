@@ -169,7 +169,7 @@ public class LeaveMessageServiceImpl extends ServiceImpl<LeaveMessageMapper, Lea
 
         if (leaveMessage.getRoot().equals(LeaveMessageLevelEnum.ROOT.getValue())) {
             // 如果为一级留言,同时删除一级留言下的二级留言
-            // 如果为二级留言,只删除二级留言,不删除其子留言,删除后虽然该留言的子留言未删除,但通过 C 端服务端的查询处理可以让其子留言不显示
+            // 如果为二级留言,只删除二级留言,不删除其子留言,删除后虽然该留言的子留言未删除,但通过 C 端前端的处理可让引用其的子留言显示的引用内容为留言已删除
             List<LeaveMessageDO> subLeaveMessageList = this.lambdaQuery()
                     .eq(LeaveMessageDO::getRoot, LeaveMessageLevelEnum.NOT_ROOT.getValue())
                     .eq(LeaveMessageDO::getRootId, leaveMessage.getId())
