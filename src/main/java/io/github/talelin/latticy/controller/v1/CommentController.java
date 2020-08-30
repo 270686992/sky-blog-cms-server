@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.github.talelin.core.annotation.*;
 import io.github.talelin.latticy.common.constant.CodeMessageConstant;
 import io.github.talelin.latticy.common.util.PageUtil;
+import io.github.talelin.latticy.common.util.SensitiveDataUtil;
 import io.github.talelin.latticy.dto.blog.comment.ReplyCommentDTO;
 import io.github.talelin.latticy.model.CommentDO;
 import io.github.talelin.latticy.service.CommentService;
@@ -19,6 +20,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.util.List;
 
 /**
  * <p>
@@ -134,6 +136,10 @@ public class CommentController extends BaseController {
                                                           @Range(min = 0, max = 1, message = "{comment.is-root.range}") Integer isRoot) {
         // 获取封装着查询结果信息的分页对象
         IPage<CommentDO> commentPage = this.commentService.getCommentListByPage(page, count, isRoot);
+
+        // 关键信息加密显示
+        this.hideInfo(commentPage);
+
         // 使用分页对象构建分页视图对象并返回
         return PageUtil.build(commentPage);
     }
@@ -156,8 +162,26 @@ public class CommentController extends BaseController {
                                                              @RequestParam(name = "id") @NotNull(message = "{id.not-null}") @Positive(message = "{id.positive}") Integer rootCommentId) {
         // 获取封装着查询结果信息的分页对象
         IPage<CommentDO> commentPage = this.commentService.getSubCommentListByPage(page, count, rootCommentId);
+
+        // 关键信息加密显示
+        this.hideInfo(commentPage);
+
         // 使用分页对象构建分页视图对象并返回
         return PageUtil.build(commentPage);
+    }
+
+    /**
+     * 隐藏评论分页对象中的信息列表中的关键信息
+     *
+     * @param commentPage 评论分页对象
+     */
+    private void hideInfo(IPage<CommentDO> commentPage) {
+        // 关键信息加密显示
+        List<CommentDO> commentList = commentPage.getRecords();
+        commentList.forEach(comment -> {
+            comment.setIp(SensitiveDataUtil.defaultHide(comment.getIp()));
+        });
+        commentPage.setRecords(commentList);
     }
 
 }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.github.talelin.core.annotation.*;
 import io.github.talelin.latticy.common.constant.CodeMessageConstant;
 import io.github.talelin.latticy.common.util.PageUtil;
+import io.github.talelin.latticy.common.util.SensitiveDataUtil;
 import io.github.talelin.latticy.dto.blog.leavemessage.ReplyLeaveMessageDTO;
 import io.github.talelin.latticy.model.LeaveMessageDO;
 import io.github.talelin.latticy.service.LeaveMessageService;
@@ -19,6 +20,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.util.List;
 
 /**
  * <p>
@@ -134,6 +136,10 @@ public class LeaveMessageController extends BaseController {
                                                                     @Range(min = 0, max = 1, message = "{leave-message.is-root.range}") Integer isRoot) {
         // 获取封装着查询结果信息的分页对象
         IPage<LeaveMessageDO> leaveMessagePage = this.leaveMessageService.getLeaveMessageListByPage(page, count, isRoot);
+
+        // 关键信息加密显示
+        this.hideInfo(leaveMessagePage);
+
         // 使用分页对象构建分页视图对象并返回
         return PageUtil.build(leaveMessagePage);
     }
@@ -156,8 +162,26 @@ public class LeaveMessageController extends BaseController {
                                                                        @RequestParam(name = "id") @NotNull(message = "{id.not-null}") @Positive(message = "{id.positive}") Integer rootLeaveMessageId) {
         // 获取封装着查询结果信息的分页对象
         IPage<LeaveMessageDO> leaveMessagePage = this.leaveMessageService.getSubLeaveMessageListByPage(page, count, rootLeaveMessageId);
+
+        // 关键信息加密显示
+        this.hideInfo(leaveMessagePage);
+
         // 使用分页对象构建分页视图对象并返回
         return PageUtil.build(leaveMessagePage);
+    }
+
+    /**
+     * 隐藏留言分页对象中的信息列表中的关键信息
+     *
+     * @param leaveMessagePage 留言分页对象
+     */
+    private void hideInfo(IPage<LeaveMessageDO> leaveMessagePage) {
+        // 关键信息加密显示
+        List<LeaveMessageDO> leaveMessageList = leaveMessagePage.getRecords();
+        leaveMessageList.forEach(leaveMessage -> {
+            leaveMessage.setIp(SensitiveDataUtil.defaultHide(leaveMessage.getIp()));
+        });
+        leaveMessagePage.setRecords(leaveMessageList);
     }
 
 }
