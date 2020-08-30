@@ -42,6 +42,11 @@ public class CategoryDO extends BaseModel implements Serializable {
     private String name;
 
     /**
+     * 文章分类描述
+     */
+    private String description;
+
+    /**
      * 文章分类图标 url
      */
     private String icon;

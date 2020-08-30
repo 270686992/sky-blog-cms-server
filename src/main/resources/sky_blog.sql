@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `priority`       INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '文章分类权重,权重值越低,展示的位置越上',
   `online`         TINYINT(3) UNSIGNED NOT NULL DEFAULT '1' COMMENT '文章分类的上线状态: 1-上线,0-下线',
   `name`           VARCHAR(50) NOT NULL COMMENT '文章分类名称',
+  `description`    VARCHAR(255) DEFAULT NULL COMMENT '文章分类描述',
   `icon`           VARCHAR(255) DEFAULT NULL COMMENT '文章分类图标 url',
   `create_time`    DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
   `update_time`    DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '更新时间',
