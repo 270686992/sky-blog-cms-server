@@ -124,7 +124,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, CommentDO> im
             CustomerDO customer = this.customerService.getCustomerById(comment.getCustomerId());
             // 封装邮件信息
             Map<String, Object> customerParameters = new HashMap<>(16);
-            customerParameters.put("articleUrl", this.homePageUrl + "/article/" + comment.getArticleId() + "/detail");
+            customerParameters.put("articleUrl", this.homePageUrl + "/article/" + comment.getArticleId());
             EmailDO email = EmailFactory.generateEmail(customer.getEmail(),
                     customer.getNickname(),
                     "博客评论回复通知",
