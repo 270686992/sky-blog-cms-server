@@ -44,6 +44,12 @@ public class CategoryDTO {
     private String name;
 
     /**
+     * 文章分类描述
+     */
+    @Length(max = 255, message = "{category.description.length}")
+    private String description;
+
+    /**
      * 文章分类图标 url
      */
     @Length(max = 255, message = "{image.length}")

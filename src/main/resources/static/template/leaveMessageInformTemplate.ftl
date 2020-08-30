@@ -35,7 +35,7 @@
                     </p>
 
                     <p>
-                        谢谢您的参与,您可以访问: <a href="https://www.xilikeli.cn/message">https://www.xilikeli.cn/message</a> 查看。
+                        谢谢您的参与,您可以访问: <a href="https://www.xilikeli.cn/messages">https://www.xilikeli.cn/message</a> 查看。
                     </p>
                 </div>
 

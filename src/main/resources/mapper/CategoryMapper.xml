@@ -11,6 +11,7 @@
         <result column="priority" property="priority" />
         <result column="online" property="online" />
         <result column="name" property="name" />
+        <result column="description" property="description" />
         <result column="icon" property="icon" />
     </resultMap>
 </mapper>
