@@ -4,6 +4,7 @@ package io.github.talelin.latticy.controller.v1;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.github.talelin.core.annotation.*;
 import io.github.talelin.latticy.common.util.PageUtil;
+import io.github.talelin.latticy.common.util.SensitiveDataUtil;
 import io.github.talelin.latticy.model.CustomerDO;
 import io.github.talelin.latticy.service.CustomerService;
 import io.github.talelin.latticy.vo.PageResponseVO;
@@ -16,6 +17,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.util.List;
 
 /**
  * <p>
@@ -91,6 +93,16 @@ public class CustomerController extends BaseController {
                                                             @Max(value = 30, message = "{page.count.max}") Integer count) {
         // 获取封装着查询结果信息的分页对象
         IPage<CustomerDO> customerPage = this.customerService.getCustomerListByPage(page, count);
+
+        // 数据加密显示
+        List<CustomerDO> customerList = customerPage.getRecords();
+        customerList.forEach(customer -> {
+            customer.setEmail(SensitiveDataUtil.emailHide(customer.getEmail()));
+            customer.setUsername(SensitiveDataUtil.defaultHide(customer.getUsername()));
+        });
+
+        customerPage.setRecords(customerList);
+
         // 使用分页对象构建分页视图对象并返回
         return PageUtil.build(customerPage);
     }

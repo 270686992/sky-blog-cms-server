@@ -4,12 +4,12 @@ package io.github.talelin.latticy.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import freemarker.template.Template;
-import io.github.talelin.autoconfigure.exception.FailedException;
 import io.github.talelin.autoconfigure.exception.ParameterException;
 import io.github.talelin.latticy.common.constant.CodeMessageConstant;
 import io.github.talelin.latticy.common.enumeration.EmailKindEnum;
 import io.github.talelin.latticy.model.EmailDO;
 import io.github.talelin.latticy.service.MailService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -33,6 +33,7 @@ import java.util.Map;
  * @since JDK1.8
  */
 @Service
+@Slf4j
 public class MailServiceImpl implements MailService {
 
     /**
@@ -116,7 +117,7 @@ public class MailServiceImpl implements MailService {
             // 发送邮件
             mailSender.send(message);
         } catch (Exception e) {
-            throw new FailedException(CodeMessageConstant.SERVER_ERROR);
+            log.error("发送邮件时出现异常: ", e);
         }
     }
 
