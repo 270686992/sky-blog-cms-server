@@ -9,7 +9,6 @@ import io.github.talelin.autoconfigure.exception.ParameterException;
 import io.github.talelin.latticy.common.constant.CodeMessageConstant;
 import io.github.talelin.latticy.common.enumeration.CustomerStateEnum;
 import io.github.talelin.latticy.common.mybatis.Page;
-import io.github.talelin.latticy.common.util.SensitiveDataUtil;
 import io.github.talelin.latticy.mapper.CustomerMapper;
 import io.github.talelin.latticy.model.CustomerDO;
 import io.github.talelin.latticy.service.CustomerService;
@@ -36,10 +35,6 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, CustomerDO>
         if (customer == null) {
             throw new NotFoundException(CodeMessageConstant.NOT_FOUND_CUSTOMER);
         }
-
-        // 数据加密显示
-        customer.setEmail(SensitiveDataUtil.emailHide(customer.getEmail()));
-        customer.setUsername(SensitiveDataUtil.defaultHide(customer.getUsername()));
 
         return customer;
     }

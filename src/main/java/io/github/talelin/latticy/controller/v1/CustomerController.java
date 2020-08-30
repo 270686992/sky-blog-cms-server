@@ -58,7 +58,11 @@ public class CustomerController extends BaseController {
     @GetMapping("/{id}")
     @LoginRequired
     public CustomerDO getCustomerById(@PathVariable(name = "id") @Positive(message = "{id.positive}") Integer customerId) {
-        return this.customerService.getCustomerById(customerId);
+        CustomerDO customer = this.customerService.getCustomerById(customerId);
+        // 数据加密显示
+        customer.setEmail(SensitiveDataUtil.emailHide(customer.getEmail()));
+        customer.setUsername(SensitiveDataUtil.defaultHide(customer.getUsername()));
+        return customer;
     }
 
     /**
