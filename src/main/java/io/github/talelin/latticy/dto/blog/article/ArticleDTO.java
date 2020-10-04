@@ -66,7 +66,7 @@ public class ArticleDTO {
      * 文章权重,权重值越低,展示的位置越上
      */
     @NotNull(message = "{article.priority.not-null}")
-    @Min(value = 0, message = "{article.priority.min}")
+    @Min(value = 1, message = "{article.priority.min}")
     private Integer priority;
 
     /**

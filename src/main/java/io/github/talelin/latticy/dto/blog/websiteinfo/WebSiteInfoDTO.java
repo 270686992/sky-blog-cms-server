@@ -91,37 +91,37 @@ public class WebSiteInfoDTO {
     /**
      * 友链申请说明
      */
-    @Length(max = 500, message = "{web-site-info.application-explain.length}")
+    @Length(max = 1000, message = "{web-site-info.application-explain.length}")
     private String applicationExplain;
 
     /**
      * 关于我的说明
      */
-    @Length(max = 500, message = "{web-site-info.about-me-explain.length}")
+    @Length(max = 1000, message = "{web-site-info.about-me-explain.length}")
     private String aboutMeExplain;
 
     /**
      * 关于站点的说明
      */
-    @Length(max = 500, message = "{web-site-info.about-site-explain.length}")
+    @Length(max = 1000, message = "{web-site-info.about-site-explain.length}")
     private String aboutSiteExplain;
 
     /**
      * 关于版权的说明
      */
-    @Length(max = 500, message = "{web-site-info.about-copyright-explain.length}")
+    @Length(max = 1000, message = "{web-site-info.about-copyright-explain.length}")
     private String aboutCopyrightExplain;
 
     /**
      * 特别说明
      */
-    @Length(max = 500, message = "{web-site-info.special-explain.length}")
+    @Length(max = 1000, message = "{web-site-info.special-explain.length}")
     private String specialExplain;
 
     /**
      * 站点公告
      */
-    @Length(max = 500, message = "{web-site-info.announcement.length}")
+    @Length(max = 1000, message = "{web-site-info.announcement.length}")
     private String announcement;
 
 }

@@ -8,7 +8,7 @@ lin:
       bucket:
       upload-token-time-limit: 3600 # 上传 token 有效期时间,单位: 秒
     # 文件服务域名
-    domain: http://localhost:5800/ # 本地时使用: http://localhost:5000/,线上时使用对象存储的域名
+    domain: http://localhost:5800/ # 本地时使用: http://localhost:5800/,线上时使用对象存储的域名
     # 排除文件类型
     exclude:
     # 包括文件类型

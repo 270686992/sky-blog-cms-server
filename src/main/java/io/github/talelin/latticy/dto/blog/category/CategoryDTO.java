@@ -26,7 +26,7 @@ public class CategoryDTO {
      * 文章分类权重,权重值越低,展示的位置越上
      */
     @NotNull(message = "{category.priority.not-null}")
-    @Min(value = 0, message = "{category.priority.min}")
+    @Min(value = 1, message = "{category.priority.min}")
     private Integer priority;
 
     /**

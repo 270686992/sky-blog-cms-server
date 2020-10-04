@@ -1,5 +1,6 @@
 package io.github.talelin.latticy.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.github.talelin.autoconfigure.exception.ForbiddenException;
@@ -125,8 +126,13 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryDO>
         // 构建分页查询对象
         Page<CategoryDO> pager = new Page<>(page, count);
 
+        // 构建查询对象
+        LambdaQueryWrapper<CategoryDO> wrapper = new LambdaQueryWrapper<>();
+        wrapper.gt(CategoryDO::getPriority, 0)
+                .orderByAsc(CategoryDO::getPriority);
+
         // 返回封装着查询结果信息的分页对象
-        return this.page(pager, null);
+        return this.page(pager, wrapper);
     }
 
 }
