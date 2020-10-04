@@ -28,7 +28,7 @@ public class FriendLinkDTO {
      * 友链权重,权重值越低,展示的位置越上
      */
     @NotNull(message = "{friend-link.priority.not-null}")
-    @Min(value = 0, message = "{friend-link.priority.min}")
+    @Min(value = 1, message = "{friend-link.priority.min}")
     private Integer priority;
 
     /**

@@ -14,11 +14,11 @@ import org.springframework.core.annotation.Order;
  */
 @Configuration
 public class UploaderConfiguration {
-    /**
-     * 切换到七牛云文件上传实现类
-     *
-     * @return 七牛云文件上传实现类
-     */
+//    /**
+//     * 切换到七牛云文件上传实现类
+//     *
+//     * @return 七牛云文件上传实现类
+//     */
 //    @Bean
 //    @Primary
 //    public Uploader qiNiuUploader() {
